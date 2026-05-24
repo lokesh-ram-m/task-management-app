@@ -1,0 +1,27 @@
+# ── .NET ─────────────────────────────────────────────────────────────────────
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.csproj.user
+appsettings.Development.json
+appsettings.Production.json
+
+# ── Angular ───────────────────────────────────────────────────────────────────
+node_modules/
+dist/
+.angular/
+
+# ── Environment / Secrets ─────────────────────────────────────────────────────
+*.env
+.env
+appsettings.local.json
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
