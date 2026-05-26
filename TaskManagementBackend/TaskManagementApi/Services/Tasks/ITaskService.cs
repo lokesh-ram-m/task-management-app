@@ -7,6 +7,6 @@ public interface ITaskService
     List<TaskResponse>  GetAll(TaskFilter filter);
     TaskResponse        GetById(int id);
     void                Add(CreateTaskRequest request, int createdBy);
-    void                Update(int id, CreateTaskRequest request);
+    void                Update(int id, UpdateTaskRequest request);
     void                Delete(int id);
 }

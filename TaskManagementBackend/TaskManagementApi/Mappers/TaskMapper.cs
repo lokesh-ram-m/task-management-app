@@ -35,4 +35,20 @@ public static class TaskMapper
             UpdatedAt    = DateTime.UtcNow
         };
     }
+
+    public static Task ToEntity(this UpdateTaskRequest dto, int createdBy)
+    {
+        return new Task
+        {
+            Title        = dto.Title,
+            Description  = dto.Description,
+            AssignedToId = dto.AssignedToId,
+            ReporterId   = dto.ReporterId,
+            ProjectId    = dto.ProjectId,
+            CreatedBy    = createdBy,
+            Status       = dto.Status,       // client can update status
+            CreatedAt    = DateTime.UtcNow,
+            UpdatedAt    = DateTime.UtcNow
+        };
+    }
 }

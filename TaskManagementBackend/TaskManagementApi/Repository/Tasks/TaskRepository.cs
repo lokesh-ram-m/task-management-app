@@ -86,6 +86,8 @@ public class TaskRepository : BaseRepository, ITaskRepository
                   Description  = @Description,
                   Status       = @Status,
                   AssignedToId = @AssignedToId,
+                  ReporterId   = @ReporterId,
+                  ProjectId    = @ProjectId,
                   UpdatedAt    = @UpdatedAt
               WHERE Id = @Id",
             task

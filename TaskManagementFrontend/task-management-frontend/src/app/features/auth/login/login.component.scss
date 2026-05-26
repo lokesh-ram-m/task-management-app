@@ -1,0 +1,96 @@
+/* Center the card both vertically and horizontally using flexbox on the full viewport */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5; /* Light grey background so the card stands out */
+}
+
+/* The white card — fixed width, rounded corners, subtle shadow for depth */
+.login-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Prevents it from stretching too wide on large screens */
+}
+
+/* Title styling */
+.login-card h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Stack inputs vertically with spacing between them */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.4rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Input base style — full width, consistent padding and border */
+.form-group input {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s; /* Smooth border color change on focus */
+}
+
+/* Highlight input on focus — gives user clear visual feedback */
+.form-group input:focus {
+  border-color: #4f46e5;
+}
+
+/* Error message below invalid fields */
+.error-msg {
+  color: #e53e3e;
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+}
+
+/* Full width button, matches the brand color used on input focus */
+.btn-login {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s; /* Smooth hover effect */
+}
+
+.btn-login:hover {
+  background-color: #4338ca;
+}
+
+/* Link to register page */
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.register-link a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}

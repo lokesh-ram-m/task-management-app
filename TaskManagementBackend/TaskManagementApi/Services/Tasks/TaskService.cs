@@ -35,7 +35,7 @@ public class TaskService : ITaskService
         _taskRepository.Add(task);
     }
 
-    public void Update(int id, CreateTaskRequest request)
+    public void Update(int id, UpdateTaskRequest request)
     {
         TaskResponse? existing = _taskRepository.GetById(id);
         if (existing == null)

@@ -1,0 +1,131 @@
+<div class="task-wrapper">
+
+  <!-- Page Header -->
+  <div class="task-header">
+    <h2>Tasks</h2>
+    <div class="header-actions">
+      <select class="filter-select" [(ngModel)]="filterStatus" [ngModelOptions]="{standalone: true}" (change)="applyFilter()">
+        <option value="">All Status</option>
+        <option value="0">New</option>
+        <option value="1">In Progress</option>
+        <option value="2">Done</option>
+      </select>
+      <button class="btn-add" (click)="openCreateModal()">+ Add Task</button>
+    </div>
+  </div>
+
+  <!-- Task Table -->
+  <div class="table-wrapper">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Project</th>
+          <th>Assigned To</th>
+          <th>Reporter</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of filteredTasks">
+          <td>{{ task.title }}</td>
+          <td><span [ngClass]="getStatusClass(task.status)">{{ getStatusLabel(task.status) }}</span></td>
+          <td>{{ task.projectName }}</td>
+          <td>{{ task.assignedToUsername }}</td>
+          <td>{{ task.reporterUsername }}</td>
+          <td class="action-btns">
+            <button class="btn-edit" (click)="openEditModal(task)">Edit</button>
+            <button class="btn-delete" (click)="deleteTask(task.id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredTasks.length === 0">
+          <td colspan="6" class="empty-msg">No tasks found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h3>{{ isEditMode ? 'Edit Task' : 'Create Task' }}</h3>
+        <button class="btn-close" (click)="closeModal()">✕</button>
+      </div>
+
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label>Title</label>
+          <input formControlName="title" type="text" placeholder="Enter task title..." />
+          <span class="error-msg" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+            Title is required
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea formControlName="description" placeholder="Enter task description..." rows="3"></textarea>
+          <span class="error-msg" *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+            Description is required
+          </span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Assigned To</label>
+            <select formControlName="assignedToId">
+              <option value="">Select user...</option>
+              <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
+            </select>
+            <span class="error-msg" *ngIf="taskForm.get('assignedToId')?.invalid && taskForm.get('assignedToId')?.touched">
+              Required
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label>Reporter</label>
+            <select formControlName="reporterId">
+              <option value="">Select user...</option>
+              <option *ngFor="let user of users" [value]="user.id">{{ user.username }}</option>
+            </select>
+            <span class="error-msg" *ngIf="taskForm.get('reporterId')?.invalid && taskForm.get('reporterId')?.touched">
+              Required
+            </span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Project</label>
+            <select formControlName="projectId">
+              <option value="">Select project...</option>
+              <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+            </select>
+            <span class="error-msg" *ngIf="taskForm.get('projectId')?.invalid && taskForm.get('projectId')?.touched">
+              Required
+            </span>
+          </div>
+
+          <div class="form-group" *ngIf="isEditMode">
+            <label>Status</label>
+            <select formControlName="status">
+              <option [value]="TaskStatus.New">New</option>
+              <option [value]="TaskStatus.InProgress">In Progress</option>
+              <option [value]="TaskStatus.Done">Done</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="closeModal()">Cancel</button>
+          <button type="submit" class="btn-save">{{ isEditMode ? 'Update' : 'Create' }}</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>

@@ -42,7 +42,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] CreateTaskRequest request)
+    public IActionResult Update(int id, [FromBody] UpdateTaskRequest request)
     {
         _taskService.Update(id, request);
 
